@@ -34,22 +34,20 @@
             bindings = <&kp DELETE>;
             key-positions = <24 23>;
         };
-    };
 
-    macros {
-        gif: gif {
-            label = "giphy";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings =
-                <&macro_press>,
-                <&kp LSHFT>,
-                <&macro_tap>,
-                <&kp N2>,
-                <&macro_release>,
-                <&kp LSHFT>,
-                <&macro_tap>,
-                <&kp G &kp I &kp F>;
+        combo_tab {
+            bindings = <&kp TAB>;
+            key-positions = <1 0>;
+        };
+
+        combo_tilde {
+            bindings = <&kp TILDE>;
+            key-positions = <0 20>;
+        };
+
+        combo_equals {
+            bindings = <&kp EQUAL>;
+            key-positions = <30 29>;
         };
     };
 
