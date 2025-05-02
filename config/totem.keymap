@@ -94,6 +94,60 @@
             hold-while-undecided-linger;
             retro-tap;
         };
+
+        td_symbols: td_symbols {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_SYMBOLS";
+            #binding-cells = <0>;
+            bindings = <&to 1>, <&sl 1>;
+
+            tapping-term-ms = <200>;
+        };
+
+        super_symbols: super_symbols {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SUPER_SYMBOLS";
+            bindings = <&mo>, <&td_symbols>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            flavor = "tap-preferred";
+            hold-while-undecided;
+            hold-while-undecided-linger;
+        };
+
+        td_numbers: td_numbers {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_NUMBERS";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&to 2>, <&sl 2>;
+        };
+
+        super_numbers: super_numbers {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SUPER_NUMBERS";
+            bindings = <&mo>, <&td_numbers>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            flavor = "tap-preferred";
+            hold-while-undecided;
+            hold-while-undecided-linger;
+        };
+
+        homerow: homerow {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+        };
     };
 
     keymap {
@@ -118,10 +172,10 @@
             //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
             bindings = <
-                         &kp B  &kp L  &kp D  &kp W  &kp Z            &kp SQT    &kp F                      &kp O                     &kp U      &kp J
-                         &kp N  &kp R  &kp T  &kp S  &kp G            &kp Y      &kp H                      &kp A                     &kp E      &kp I
-&mt LEFT_CONTROL ESCAPE  &kp Q  &kp X  &kp M  &kp C  &kp V            &kp K      &kp P                      &kp DOT                   &kp MINUS  &kp FSLH  &kp COMMA
-                                       &to 2  &to 1  &kp BACKSPACE    &kp SPACE  &super_shift LEFT_SHIFT 0  &layer_hold 3 UNDERSCORE
+                         &kp B                &kp L                &kp D                    &kp W                  &kp Z            &kp SQT    &kp F                      &kp O                     &kp U                 &kp J
+                         &homerow LEFT_GUI N  &homerow LEFT_ALT R  &homerow LEFT_CONTROL T  &homerow LEFT_SHIFT S  &kp G            &kp Y      &homerow RIGHT_SHIFT H     &homerow RIGHT_CONTROL A  &homerow RIGHT_ALT E  &homerow RIGHT_GUI I
+&mt LEFT_CONTROL ESCAPE  &kp Q                &kp X                &kp M                    &kp C                  &kp V            &kp K      &kp P                      &kp DOT                   &kp MINUS             &kp FSLH              &kp COMMA
+                                                                   &super_numbers 2 0       &super_symbols 1 0     &kp BACKSPACE    &kp SPACE  &super_shift LEFT_SHIFT 0  &layer_hold 3 UNDERSCORE
             >;
         };
 
@@ -133,10 +187,10 @@
 
         symbols {
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &to 2   &trans    &trans  &to 0   &trans
+        &trans  &trans  &trans  &trans  &trans    &kp EXCLAMATION  &kp LEFT_BRACE  &kp APOSTROPHE  &kp DOUBLE_QUOTES  &kp RIGHT_BRACE
+        &trans  &trans  &trans  &trans  &trans    &kp HASH         &kp CARET       &kp UNDERSCORE  &kp EQUAL          &kp DOLLAR
+&trans  &trans  &trans  &trans  &trans  &trans    &trans           &trans          &trans          &trans             &trans           &kp ASTERISK
+                        &trans  &to 2   &trans    &trans           &to 0           &trans
             >;
         };
 
@@ -151,10 +205,10 @@
 
         functions {
             bindings = <
-       &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-       &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&to 4  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                       &trans  &trans  &trans    &trans  &to 0   &trans
+       &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans          &trans        &trans
+       &trans  &trans  &trans  &trans  &trans    &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW
+&to 4  &trans  &trans  &trans  &trans  &trans    &trans  &kp HOME        &kp PAGE_DOWN   &kp PAGE_UP   &kp END          &trans
+                       &trans  &trans  &trans    &trans  &to 0           &trans
             >;
         };
 
@@ -163,7 +217,16 @@
         &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      &trans      &trans  &trans  &trans  &trans
         &trans        &trans        &trans        &trans        &trans            &trans      &trans  &trans  &trans  &trans
 &trans  &bt BT_CLR    &trans        &trans        &trans        &bt BT_CLR_ALL    &trans      &trans  &trans  &trans  &trans  &trans
-                                    &trans        &trans        &trans            &kp K_MUTE  &to 0   &trans
+                                    &trans        &trans        &trans            &kp C_MUTE  &to 0   &trans
+            >;
+        };
+
+        layer_5 {
+            bindings = <
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans  &trans
             >;
         };
     };
