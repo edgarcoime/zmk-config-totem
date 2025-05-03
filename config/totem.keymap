@@ -43,21 +43,25 @@
         combo_tilde {
             bindings = <&kp TILDE>;
             key-positions = <0 20>;
+            layers = <0>;
         };
 
         combo_minus {
             bindings = <&kp MINUS>;
             key-positions = <30 29>;
+            layers = <0>;
         };
 
         combo_semi {
             bindings = <&kp SEMICOLON>;
             key-positions = <9 8>;
+            layers = <0>;
         };
 
         combo_bslsh {
             bindings = <&kp BACKSLASH>;
             key-positions = <31 9>;
+            layers = <0>;
         };
     };
 
