@@ -103,8 +103,7 @@
             compatible = "zmk,behavior-tap-dance";
             label = "TD_SYMBOLS";
             #binding-cells = <0>;
-            bindings = <&to 1>, <&sl 1>;
-
+            bindings = <&to 1>;
             tapping-term-ms = <200>;
         };
 
@@ -126,7 +125,7 @@
             label = "TD_NUMBERS";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&to 2>, <&sl 2>;
+            bindings = <&sl 2>;
         };
 
         super_numbers: super_numbers {
