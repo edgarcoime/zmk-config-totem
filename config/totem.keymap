@@ -81,9 +81,9 @@
             compatible = "zmk,behavior-tap-dance";
             label = "STICKY_CAPSWORD";
             #binding-cells = <0>;
-            bindings = <&sk LEFT_SHIFT>, <&caps_word>;
+            bindings = <&modified_sticky_shift LEFT_SHIFT>, <&caps_word>;
 
-            tapping-term-ms = <200>;
+            tapping-term-ms = <150>;
         };
 
         super_shift: super_shift {
@@ -99,14 +99,6 @@
             retro-tap;
         };
 
-        td_symbols: td_symbols {
-            compatible = "zmk,behavior-tap-dance";
-            label = "TD_SYMBOLS";
-            #binding-cells = <0>;
-            bindings = <&to 1>;
-            tapping-term-ms = <200>;
-        };
-
         super_symbols: super_symbols {
             compatible = "zmk,behavior-hold-tap";
             label = "SUPER_SYMBOLS";
@@ -116,14 +108,6 @@
             tapping-term-ms = <100>;
             hold-while-undecided;
             retro-tap;
-        };
-
-        td_numbers: td_numbers {
-            compatible = "zmk,behavior-tap-dance";
-            label = "TD_NUMBERS";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&sl 2>;
         };
 
         super_numbers: super_numbers {
@@ -146,6 +130,36 @@
             tapping-term-ms = <200>;
             quick-tap-ms = <0>;
             flavor = "tap-preferred";
+        };
+
+        modified_sticky_shift: modified_sticky_shift {
+            compatible = "zmk,behavior-sticky-key";
+            label = "MODIFIED_STICKY_SHIFT";
+            bindings = <&kp>;
+            #binding-cells = <1>;
+            release-after-ms = <300>;
+            quick-release;
+        };
+
+        sticky_mods: sticky_mods {
+            compatible = "zmk,behavior-sticky-key";
+            label = "STICKY_MODS";
+            bindings = <&kp>;
+            #binding-cells = <1>;
+            release-after-ms = <1000>;
+            ignore-modifiers;
+            lazy;
+        };
+
+        super_sticky_mods: super_sticky_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SUPER_STICKY_MODS";
+            bindings = <&kp>, <&sticky_mods>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            hold-while-undecided;
+            retro-tap;
         };
     };
 
@@ -195,10 +209,10 @@
 
         numbers {
             bindings = <
-          &kp LEFT_GUI  &kp LEFT_ALT  &kp LEFT_CONTROL  &kp LEFT_SHIFT  &kp SEMI      &kp MINUS  &kp N7  &kp N8          &kp N9  &kp PLUS
-          &trans        &trans        &trans            &trans          &kp COMMA     &kp N0     &kp N4  &kp N5          &kp N6  &kp ASTERISK
-&kp CAPS  &trans        &trans        &trans            &trans          &kp PERIOD    &kp DOT    &kp N1  &kp N2          &kp N3  &kp SLASH     &kp EQUAL
-                                      &trans            &to 3           &trans        &kp N0     &to 0   &kp KP_NUMLOCK
+          &super_sticky_mods LEFT_GUI LEFT_GUI  &super_sticky_mods LEFT_ALT LEFT_ALT  &super_sticky_mods LEFT_CONTROL LEFT_CONTROL  &super_sticky_mods LEFT_SHIFT LEFT_SHIFT  &kp SEMI      &kp MINUS  &kp N7  &kp N8          &kp N9  &kp PLUS
+          &trans                                &trans                                &trans                                        &trans                                    &kp COMMA     &kp N0     &kp N4  &kp N5          &kp N6  &kp ASTERISK
+&kp CAPS  &trans                                &trans                                &trans                                        &trans                                    &kp PERIOD    &kp DOT    &kp N1  &kp N2          &kp N3  &kp SLASH     &kp EQUAL
+                                                                                      &trans                                        &to 3                                     &trans        &kp N0     &to 0   &kp KP_NUMLOCK
             >;
         };
 
