@@ -83,7 +83,7 @@
             #binding-cells = <0>;
             bindings = <&modified_sticky_shift LEFT_SHIFT>, <&caps_word>;
 
-            tapping-term-ms = <150>;
+            tapping-term-ms = <200>;
         };
 
         super_shift: super_shift {
